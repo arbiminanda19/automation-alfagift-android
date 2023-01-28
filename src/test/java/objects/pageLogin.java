@@ -10,6 +10,7 @@ public class pageLogin {
     By txt_numberUnregistered = By.xpath("//*[@resource-id='com.alfamart.alfagift:id/txtMessage']");
     By txt_phoneNumberError = By.xpath("//*[@resource-id='com.alfamart.alfagift:id/tvPhoneNumberError']");
     By txt_passwordError = By.xpath("//*[@resource-id='com.alfamart.alfagift:id/tvPasswordError']");
+    By btn_scanBarcode = By.xpath("//*[@resource-id='com.alfamart.alfagift:id/imgScanCard']");
 
     public By getInput_number() {
         return input_number;
@@ -33,5 +34,9 @@ public class pageLogin {
 
     public By getTxt_phoneNumberError() {
         return txt_phoneNumberError;
+    }
+
+    public By getBtn_scanBarcode() {
+        return btn_scanBarcode;
     }
 }

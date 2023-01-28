@@ -3,12 +3,16 @@ package stepDef;
 import config.env;
 import io.cucumber.java.en.When;
 import objects.pageLogin;
+import objects.pageScanBarcode;
+import objects.pageHome;
 import org.junit.Assert;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class login extends env {
 
     pageLogin pageLogin = new pageLogin();
+    pageScanBarcode pageScanBarcode = new pageScanBarcode();
+    pageHome pageHome = new pageHome();
 
     @When("user input registered Nomor HP or Nomor Member")
     public void input_registered_number() {
@@ -137,4 +141,25 @@ public class login extends env {
         Assert.assertFalse((txt_phoneNumber).contains(phoneNumberMoreThan16Char));
         Assert.assertTrue(txt_phoneNumber.length() == 16);
     }
+
+    @When("user click barcode icon")
+    public void click_barcode_icon() {
+        driver.findElement(pageLogin.getBtn_scanBarcode()).click();
+    }
+
+    @When("user scan any object other than a barcode")
+    public void on_login_scan_barcode_page() {
+        wait.until(
+                ExpectedConditions.visibilityOfElementLocated(pageScanBarcode.getTxt_scanBarcodeTitlePage())
+        );
+        wait.until(
+                ExpectedConditions.visibilityOfElementLocated(pageScanBarcode.getContainer_cameraView())
+        );
+    }
+
+    @When("user failed login and cant move from scan barcodepage")
+    public void cant_move_from_barcode_page() {
+        Assert.assertFalse(driver.findElements(pageHome.getPage_home()).size() > 0);
+    }
+
 }
