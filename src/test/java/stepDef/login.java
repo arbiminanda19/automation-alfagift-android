@@ -34,6 +34,22 @@ public class login extends env {
         driver.findElement(pageLogin.getInput_number()).sendKeys("5647");
     }
 
+    @When("user input valid Nomor HP format but less than 10 digit")
+    public void input_phone_number_less_than_10_char() {
+        wait.until(
+                ExpectedConditions.visibilityOfElementLocated(pageLogin.getInput_number())
+        );
+        driver.findElement(pageLogin.getInput_number()).sendKeys("0822");
+    }
+
+    @When("user input valid Nomor HP format but more than 16 digit")
+    public void input_phone_number_less_than_16_char() {
+        wait.until(
+                ExpectedConditions.visibilityOfElementLocated(pageLogin.getInput_number())
+        );
+        driver.findElement(pageLogin.getInput_number()).sendKeys(phoneNumberMoreThan16Char);
+    }
+
     @When("user input registered Password")
     public void input_registered_password() {
         driver.findElement(pageLogin.getInput_password()).sendKeys(registeredPassword);
@@ -87,5 +103,20 @@ public class login extends env {
                 ExpectedConditions.visibilityOfElementLocated(pageLogin.getTxt_phoneNumberError())
         );
         Assert.assertTrue((driver.findElement(pageLogin.getTxt_phoneNumberError()).getText()).contains("Format nomor HP atau No. kartu member anda salah"));
+    }
+
+    @When("user see phone number must between 10 until 16 char error message")
+    public void see_phone_number_less_than_10_char_error() {
+        wait.until(
+                ExpectedConditions.visibilityOfElementLocated(pageLogin.getTxt_phoneNumberError())
+        );
+        Assert.assertTrue((driver.findElement(pageLogin.getTxt_phoneNumberError()).getText()).contains("Nomor HP harus di antara 10 hingga 16 digit"));
+    }
+
+    @When("user see phone number just inputted 16 chars")
+    public void see_phone_number_just_inputted_16_chars() {
+        String txt_phoneNumber = driver.findElement(pageLogin.getInput_number()).getText();
+        Assert.assertFalse((txt_phoneNumber).contains(phoneNumberMoreThan16Char));
+        Assert.assertTrue(txt_phoneNumber.length() == 16);
     }
 }
