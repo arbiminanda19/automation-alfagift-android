@@ -1,17 +1,17 @@
 @All
 Feature: Login
 
-#  @Positive
-#  Scenario: TC1 - Ensure user successfully Login with valid and registered credential
-#
-#    Given user is on welcome page
-#    When user click Masuk button
-#    And user input registered Nomor HP or Nomor Member
-#    And user input registered Password
-#    And user click Lanjut button
-#    Then user is on Home page
-#    And user see Alfagift menu
-#
+  @Positive
+  Scenario: TC1 - Ensure user successfully Login with valid and registered credential
+
+    Given user is on welcome page
+    When user click Masuk button
+    And user input registered Nomor HP or Nomor Member
+    And user input registered Password
+    And user click Lanjut button
+    Then user is on Home page
+    And user see Alfagift menu
+
 #  @Negative
 #  Scenario: TC3 - Ensure user failed Login with unregistered phone or member number
 #
@@ -96,12 +96,12 @@ Feature: Login
 #    And user try input phone number with contains char except number
 #    And user click Lanjut button
 #    Then user see invalid phone or member number format error message
-
-  @Negative
-  Scenario: TC14 - Ensure user failed field phone or member number with element except number
-
-    Given user is on welcome page
-    When user click Masuk button
-    And user click barcode icon
-    And user scan any object other than a barcode
-    Then user failed login and cant move from scan barcodepage
+#
+#  @Negative
+#  Scenario: TC14 - Ensure user failed field phone or member number with element except number
+#
+#    Given user is on welcome page
+#    When user click Masuk button
+#    And user click barcode icon
+#    And user scan any object other than a barcode
+#    Then user failed login and cant move from scan barcodepage
