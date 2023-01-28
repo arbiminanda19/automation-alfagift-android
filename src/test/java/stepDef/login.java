@@ -49,4 +49,12 @@ public class login extends env {
         Assert.assertTrue((driver.findElement(pageLogin.getTxt_numberUnregistered()).getText()).contains("Nomor Anda belum terdaftar"));
     }
 
+    @When("user see wrong password error message")
+    public void see_wrong_password_error() {
+        wait.until(
+                ExpectedConditions.visibilityOfElementLocated(pageLogin.getTxt_wrongpassword())
+        );
+        Assert.assertTrue((driver.findElement(pageLogin.getTxt_wrongpassword()).getText()).contains("Password Anda salah"));
+    }
+
 }

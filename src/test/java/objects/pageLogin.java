@@ -8,6 +8,7 @@ public class pageLogin {
     By input_password = By.xpath("//*[@resource-id='com.alfamart.alfagift:id/etPassword']");
     By btn_next = By.xpath("//*[@resource-id='com.alfamart.alfagift:id/btnNext']");
     By txt_numberUnregistered = By.xpath("//*[@resource-id='com.alfamart.alfagift:id/txtMessage']");
+    By txt_wrongpassword = By.xpath("//*[@resource-id='com.alfamart.alfagift:id/tvPasswordError']");
 
     public By getInput_number() {
         return input_number;
@@ -23,5 +24,9 @@ public class pageLogin {
 
     public By getTxt_numberUnregistered() {
         return txt_numberUnregistered;
+    }
+
+    public By getTxt_wrongpassword() {
+        return txt_wrongpassword;
     }
 }
