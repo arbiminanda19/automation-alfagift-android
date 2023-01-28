@@ -8,4 +8,5 @@ stepDef/hooks.class
 objects/pageLogin.class
 objects/pageGeneral.class
 stepDef/home.class
+helper/randomFunction.class
 stepDef/welcome.class

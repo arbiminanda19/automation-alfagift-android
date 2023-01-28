@@ -4,7 +4,7 @@ import config.env;
 import io.cucumber.java.en.When;
 import objects.pageLogin;
 import objects.pageScanBarcode;
-import objects.pageHome;
+import helper.randomFunction;
 import org.junit.Assert;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -12,14 +12,18 @@ public class login extends env {
 
     pageLogin pageLogin = new pageLogin();
     pageScanBarcode pageScanBarcode = new pageScanBarcode();
-    pageHome pageHome = new pageHome();
+    randomFunction randomFunction = new randomFunction();
 
     @When("user input registered Nomor HP or Nomor Member")
     public void input_registered_number() {
         wait.until(
                 ExpectedConditions.visibilityOfElementLocated(pageLogin.getInput_number())
         );
-        driver.findElement(pageLogin.getInput_number()).sendKeys(registeredPhoneNumber);
+        if (randomFunction.getNumberType() == "Number") {
+            driver.findElement(pageLogin.getInput_number()).sendKeys(registeredPhoneNumber);
+        } else {
+            driver.findElement(pageLogin.getInput_number()).sendKeys(registeredMemberNumber);
+        }
     }
 
     @When("user input unregistered Nomor HP or Nomor Member")
@@ -135,7 +139,7 @@ public class login extends env {
         Assert.assertTrue((driver.findElement(pageLogin.getTxt_passwordError()).getText()).contains("Password minimum 8 karakter"));
     }
 
-    @When("user see phone number just inputted 16 chars")
+    @When("user see number field just inputted with 16 chars")
     public void see_phone_number_just_inputted_16_chars() {
         String txt_phoneNumber = driver.findElement(pageLogin.getInput_number()).getText();
         Assert.assertFalse((txt_phoneNumber).contains(phoneNumberMoreThan16Char));
@@ -157,9 +161,9 @@ public class login extends env {
         );
     }
 
-    @When("user failed login and cant move from scan barcodepage")
+    @When("user failed fill number field and cant move from scan barcodepage")
     public void cant_move_from_barcode_page() {
-        Assert.assertFalse(driver.findElements(pageHome.getPage_home()).size() > 0);
+        Assert.assertFalse(driver.findElements(pageLogin.getInput_number()).size() > 0);
         driver.findElement(pageScanBarcode.getTxt_scanBarcodeTitlePage());
     }
 
