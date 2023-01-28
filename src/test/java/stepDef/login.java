@@ -57,4 +57,19 @@ public class login extends env {
         Assert.assertTrue((driver.findElement(pageLogin.getTxt_wrongpassword()).getText()).contains("Password Anda salah"));
     }
 
+    @When("user see number cant empty error message")
+    public void see_number_cant_empty_error() {
+        wait.until(
+                ExpectedConditions.visibilityOfElementLocated(pageLogin.getTxt_phoneNumberCantEmpty())
+        );
+        Assert.assertTrue((driver.findElement(pageLogin.getTxt_phoneNumberCantEmpty()).getText()).contains("Nomor HP / No. kartu Member tidak boleh kosong"));
+    }
+
+    @When("user see password cant empty error message")
+    public void see_password_cant_empty_error() {
+        wait.until(
+                ExpectedConditions.visibilityOfElementLocated(pageLogin.getTxt_passwordCantEmpty())
+        );
+        Assert.assertTrue((driver.findElement(pageLogin.getTxt_passwordCantEmpty()).getText()).contains("Kolom ini diperlukan"));
+    }
 }
