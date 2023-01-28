@@ -37,9 +37,10 @@ public class hooks extends env {
     @After
     public void after(Scenario scenario) throws IOException {
         File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(srcFile, new File(System.getProperty("user.dir") + "/src/test/resources/screenshots/all/" + scenario.getName() + ".png"));
         if (scenario.isFailed()){
             FileUtils.copyFile(srcFile, new File(System.getProperty("user.dir") + "/src/test/resources/screenshots/failed/" + scenario.getName() + ".png"));
+        } else {
+            FileUtils.copyFile(srcFile, new File(System.getProperty("user.dir") + "/src/test/resources/screenshots/all/" + scenario.getName() + ".png"));
         }
         driver.quit();
     }
