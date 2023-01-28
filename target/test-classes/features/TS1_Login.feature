@@ -77,13 +77,23 @@ Feature: Login
 #    When user click Masuk button
 #    And user input valid Nomor HP format but more than 16 digit
 #    Then user see phone number just inputted 16 chars
+#
+#  @Negative
+#  Scenario: TC11 - Ensure user failed login with password less than 8 character
+#
+#    Given user is on welcome page
+#    When user click Masuk button
+#    And user input registered Nomor HP or Nomor Member
+#    And user input password less than 8 char
+#    And user click Lanjut button
+#    Then user see password minimum 8 char error message
 
   @Negative
-  Scenario: TC11 - Ensure user failed login with password less than 8 character
+  Scenario: TC12 - Ensure user failed field phone or member number with element except number
 
     Given user is on welcome page
     When user click Masuk button
-    And user input registered Nomor HP or Nomor Member
-    And user input password less than 8 char
+    And user try input phone number with contains char except number
+    And user input registered Password
     And user click Lanjut button
-    Then user see password minimum 8 char error message
+    Then user see invalid phone or member number format error message

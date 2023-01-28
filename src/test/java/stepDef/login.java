@@ -50,6 +50,11 @@ public class login extends env {
         driver.findElement(pageLogin.getInput_number()).sendKeys(phoneNumberMoreThan16Char);
     }
 
+    @When("user try input phone number with contains char except number")
+    public void input_contains_except_number_in_number_field() {
+        driver.findElement(pageLogin.getInput_number()).sendKeys("phone08222");
+    }
+
     @When("user input registered Password")
     public void input_registered_password() {
         driver.findElement(pageLogin.getInput_password()).sendKeys(registeredPassword);
