@@ -160,6 +160,7 @@ public class login extends env {
     @When("user failed login and cant move from scan barcodepage")
     public void cant_move_from_barcode_page() {
         Assert.assertFalse(driver.findElements(pageHome.getPage_home()).size() > 0);
+        driver.findElement(pageScanBarcode.getTxt_scanBarcodeTitlePage());
     }
 
 }
