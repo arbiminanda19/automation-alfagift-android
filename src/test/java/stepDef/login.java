@@ -60,6 +60,11 @@ public class login extends env {
         driver.findElement(pageLogin.getInput_password()).sendKeys("unregispass");
     }
 
+    @When("user input password less than 8 char")
+    public void input_password_less_than_8_char() {
+        driver.findElement(pageLogin.getInput_password()).sendKeys("less");
+    }
+
     @When("user click Lanjut button")
     public void click_next_button() {
         driver.findElement(pageLogin.getBtn_next()).click();
@@ -111,6 +116,14 @@ public class login extends env {
                 ExpectedConditions.visibilityOfElementLocated(pageLogin.getTxt_phoneNumberError())
         );
         Assert.assertTrue((driver.findElement(pageLogin.getTxt_phoneNumberError()).getText()).contains("Nomor HP harus di antara 10 hingga 16 digit"));
+    }
+
+    @When("user see password minimum 8 char error message")
+    public void see_password_less_8_char_error() {
+        wait.until(
+                ExpectedConditions.visibilityOfElementLocated(pageLogin.getTxt_passwordError())
+        );
+        Assert.assertTrue((driver.findElement(pageLogin.getTxt_passwordError()).getText()).contains("Password minimum 8 karakter"));
     }
 
     @When("user see phone number just inputted 16 chars")
