@@ -21,27 +21,30 @@ public class hooks extends env {
     @Before
     public void openApps() throws IOException, InterruptedException {
         capabilities = new DesiredCapabilities();
-        capabilities.setCapability("deviceName", "Pixel_3a_API_32_arm64-v8a");
+        capabilities.setCapability("deviceName", "Pixel 3a XL API 32");
         capabilities.setCapability("udid", "emulator-5554");
         capabilities.setCapability("platformName", "Android");
         capabilities.setCapability("platformVersion", "12");
         capabilities.setCapability("app", System.getProperty("user.dir") + "/src/test/resources/app/alfagift.apk");
-        capabilities.setCapability("autoGrantPermissions", "true");
+        capabilities.setCapability("autoGrantPermissions", true);
+        capabilities.setCapability("autoAcceptAlerts", true);
 
         URL url = new URL(baseUrl);
         driver = new AndroidDriver(url, capabilities);
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         wait = new WebDriverWait(driver, duration);
     }
 
     @After
     public void after(Scenario scenario) throws IOException {
         File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        String savePhotoFolder;
         if (scenario.isFailed()){
-            FileUtils.copyFile(srcFile, new File(System.getProperty("user.dir") + "/src/test/resources/screenshots/failed/" + scenario.getName() + ".png"));
+            savePhotoFolder = "/src/test/resources/screenshots/failed/";
         } else {
-            FileUtils.copyFile(srcFile, new File(System.getProperty("user.dir") + "/src/test/resources/screenshots/all/" + scenario.getName() + ".png"));
+            savePhotoFolder = "/src/test/resources/screenshots/all/";
         }
+        FileUtils.copyFile(srcFile, new File(System.getProperty("user.dir") + savePhotoFolder + scenario.getName() + ".png"));
         driver.quit();
     }
 
